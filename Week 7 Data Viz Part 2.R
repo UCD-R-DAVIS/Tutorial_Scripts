@@ -90,7 +90,7 @@ display.brewer.all(colorblindFriendly = TRUE)
 ggplot(diamonds, aes(x= clarity, y= carat, color=price)) +
   geom_point(alpha = 0.2) + theme_classic() +
   scale_color_viridis_c(option = "A", direction = 
-                          1)
+                          -1)
 
 #let's pick another viridis color scheme by using a different letter for option
 ggplot(diamonds, aes(x= clarity, y= carat, color=price)) +
@@ -113,15 +113,18 @@ ggplot(diamonds, aes(x= cut, y= carat, fill = color)) +
 #scale_color is for color and scale_fill is for the fill. 
 #note I have to change the
 #aes parameter from "fill =" to "color =", to match
-ggplot(diamonds, aes(x= cut, y= carat, color = color)) +
-  geom_boxplot(alpha = 0.2) + theme_classic() + 
+ggplot(diamonds, aes(x= cut, y= carat, color = color, fill = color)) +
+  geom_boxplot() + theme_classic() + 
   ggtitle("Diamond Quality by Cut") + 
-  scale_color_viridis_d("color")
+  #scale_color_viridis_d("color") +
+  scale_fill_viridis_d("color") 
 
 #here's how it looks on a barplot
 ggplot(diamonds, aes(x = clarity, fill = cut)) + 
   geom_bar() +
-  theme(axis.text.x = element_text(angle=70, vjust=0.5)) +
+  ggtitle("My title") +
+  theme(axis.text.x = element_text(angle=70, vjust=0.5),
+        plot.title = element_text(hjust = 1)) +
   scale_fill_viridis_d("cut", option = "B") +
   theme_classic()
 
@@ -138,7 +141,7 @@ display.brewer.all(colorblindFriendly = TRUE)
 #From RColorBrewer:
 ggplot(iris, 
        aes(x= Sepal.Length, y= Petal.Length, fill = Species)) +
-  geom_point(shape=24, color="black") + theme_classic() + 
+  geom_point(shape=22, colour="black") + theme_classic() + 
   ggtitle("Sepal and Petal Length of Three Iris Species") + 
   scale_fill_brewer(palette = "Set2")
 #how did we know the name of the palette is "Set2"? From this list:
@@ -159,7 +162,8 @@ ggplot(iris, aes(x= Sepal.Length, y= Petal.Length, color = Species)) +
 #colorblind palette from the ggthemes package but with gray instead of black.
 #This is an example of how to create a named vector
 #of colors and use it as a manual fill.
-cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442",
+               "#0072B2", "#D55E00", "#CC79A7")
 names(cbPalette) <- levels(iris$Species)
 #we don't need all the colors in the palette because there are only 3 categories. 
 #We cut the vector length to 3 here
@@ -188,7 +192,7 @@ myiris$size <- factor(myiris$size, levels = c(
 
 ggplot(myiris, aes(x= Petal.Width, y= Petal.Length, color = size)) +
   geom_point(size = 2) + theme_gray() +
-  ggtitle("Diamond Quality by Cut") + 
+  ggtitle("Petal Size and Sepal Length") + 
   scale_color_brewer(palette = "RdYlBu")
 
 #Paul Tol also has developed qualitative, sequential, and diverging colorblind palettes:
