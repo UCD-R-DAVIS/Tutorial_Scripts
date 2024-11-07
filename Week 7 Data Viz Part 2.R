@@ -66,6 +66,9 @@ ggplot(diamonds, aes(x= carat, y= price, color=clarity)) +
 #Be sure to read this superb article!
 #https://www.nature.com/articles/s41467-020-19160-7?utm_source=twitter&utm_medium=social&utm_content=organic&utm_campaign=NGMT_USG_JC01_GL_NRJournals
 
+#And this one!
+#https://research.google/blog/turbo-an-improved-rainbow-colormap-for-visualization/
+
 #I use the colorpalette knowledge I learned from R-DAVIS every time I make a plot,
 #and it's not an exaggeration to say that it changed my life!
 #Here are some templates that you may use and edit in your own work.
@@ -131,10 +134,6 @@ ggplot(diamonds, aes(x= cut, y= carat, fill = color)) +
 display.brewer.all(colorblindFriendly = TRUE)
 
 #QUALITATIVE CATEGORICAL
-#don't worry about this line of code; the "sub" function isn't part of this course
-#we're just making a column for the make of the car
-mycars <- cbind(mtcars,make=sub(" .*", "", rownames(mtcars)))
-mycars <- head(mycars, n = 16)
 
 #From RColorBrewer:
 ggplot(iris, 
