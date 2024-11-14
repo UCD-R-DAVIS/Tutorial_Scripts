@@ -64,7 +64,7 @@ sample_dates_3
 
 #challenge
 as.Date("Jul 04, 2019", format = 
-        "%b%d,%Y")
+          "%b%d,%Y")
 
 
 
@@ -189,7 +189,7 @@ lubridate::ymd_hm("2016/04/05 14:47",
 
 #converts 12 hour time into 24 hour time:
 latime <- lubridate::ymd_hms("2016/04/05 4:47:21 PM", 
-                   tz="America/Los_Angeles") 
+                             tz="America/Los_Angeles") 
 latime
 #how to change time zones
 with_tz(latime, tzone = "GMT")
@@ -215,12 +215,12 @@ library(dplyr)
 library(readr)
 
 # read in some data and skip header lines
-mloa1 <- read_csv("https://raw.githubusercontent.com/ucd-cepb/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")
+mloa1 <- read_csv("https://raw.githubusercontent.com/UCD-R-DAVIS/R-DAVIS/main/data/mauna_loa_met_2001_minute.csv")
 head(mloa1) #R tried to guess for you that 
 #the year, month, day, and hour columns were numbers
 
 # import raw dataset & specify column types
-mloa2 <- read_csv("https://raw.githubusercontent.com/ucd-cepb/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv",
+mloa2 <- read_csv("https://raw.githubusercontent.com/UCD-R-DAVIS/R-DAVIS/main/data/mauna_loa_met_2001_minute.csv",
                   col_types = "cccccccddddddddd")
 
 #notice the difference in the data types of these two objects:
@@ -240,8 +240,8 @@ glimpse(mloa2)
 # now we are ready to make a datetime col 
 #so that we can use lubridate on it:
 mloa2$datetime <- paste(mloa2$year, "-", mloa2$month,
-                  "-", mloa2$day, ", ", mloa2$hour24, ":",
-                   mloa2$min, sep = "")
+                        "-", mloa2$day, ", ", mloa2$hour24, ":",
+                        mloa2$min, sep = "")
 
 glimpse(mloa2)
 #since we used "paste," our new column is a character string type
@@ -270,8 +270,8 @@ glimpse(mloa2)
 #digits for each portion of the datetime 
 #(eg month could be "2" or "12")
 mloa2$datetime_test <- as_datetime(mloa2$datetime, 
-                        tz="America/Los_Angeles", 
-                        format="%Y-%m-%d, %H:%M")
+                                   tz="America/Los_Angeles", 
+                                   format="%Y-%m-%d, %H:%M")
 #note: America/Los_Angeles is not actually 
 #the time zone that this data is from,
 #which is evident because when telling 
@@ -283,7 +283,7 @@ mloa2$datetime_test <- as_datetime(mloa2$datetime,
 # Instead, convert using the ymd_functions
 #This method works!
 mloa2$datetime_test2 <- ymd_hm(mloa2$datetime, 
-                          tz = "Pacific/Honolulu")
+                               tz = "Pacific/Honolulu")
 
 # OR wrap in as.character()
 mloa1$datetime <- ymd_hm(as.character(mloa2$datetime), 
