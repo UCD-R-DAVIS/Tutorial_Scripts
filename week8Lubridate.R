@@ -331,3 +331,14 @@ dst(gm)
 hi <- with_tz(latime, tzone = "Pacific/Honolulu")
 dst(hi) 
 # --> 2016-04-05 16:47:21
+
+
+
+#this is a sequence
+seq(1,10,1)
+
+#you can use sequences with dates
+seq(mdy('01-01-2020'),mdy('10-01-2020'),by = 1)
+#you can subtract time from dates
+mdy('01-01-2020') - months(2)
+
